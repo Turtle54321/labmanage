@@ -1,0 +1,113 @@
+.ui-pagination {
+  height: 40px;
+}
+.ui-pagination .page-slider-loading {
+  background: url(/widget/ui/pagination/image/loading.gif) no-repeat center center;
+  height: 40px;
+  background-size: 40px 40px;
+  display: none;
+}
+.ui-pagination .page-slider-no-record {
+  height: 40px;
+  line-height: 40px;
+  color: #3F4543;
+  text-align: center;
+  font-size: 15px;
+  display: none;
+}
+.ui-pagination .page-slider {
+  display: inline-block;
+  height: 37px;
+  float: right;
+  display: none;
+  color: #999999;
+}
+.ui-pagination .page-slider a {
+  display: inline-block;
+  transition: background 0.3s ease-in-out;
+  cursor: pointer;
+  outline: none;
+  background: #f9f9f9;
+  border-radius: 2px;
+  border: 1px solid #e5e5e5;
+  margin: 0 5px;
+}
+.ui-pagination .page-slider a:hover {
+  background-color: #e9e7e8;
+}
+.ui-pagination .page-slider a.cur-page {
+  background-color: transparent;
+  border-color: transparent;
+}
+.ui-pagination .page-slider a.cur-page:hover {
+  cursor: default;
+}
+.ui-pagination .page-slider .page-btn {
+  float: left;
+  height: 24px;
+  line-height: 24px;
+  width: 24px;
+  text-align: center;
+}
+.ui-pagination .page-slider .pre-btn {
+  background: #f9f9f9 url(/widget/ui/pagination/image/pre-btn.png) no-repeat center;
+}
+.ui-pagination .page-slider .next-btn {
+  background: #f9f9f9 url(/widget/ui/pagination/image/next-btn.png) no-repeat center;
+}
+.ui-pagination .page-slider .first-btn {
+  background: #f9f9f9 url(/widget/ui/pagination/image/first-btn.png) no-repeat center;
+}
+.ui-pagination .page-slider .last-btn {
+  background: #f9f9f9 url(/widget/ui/pagination/image/last-btn.png) no-repeat center;
+}
+.ui-pagination .page-slider .page-number-container {
+  float: left;
+}
+.ui-pagination .page-slider .page-number-container a {
+  float: left;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 8px;
+  text-align: center;
+  transition: background 0.3s ease-in-out;
+}
+.ui-pagination .page-slider .page-number-container .a:hover {
+  background: #e3e3e3;
+}
+.ui-pagination .page-slider .point {
+  display: block;
+  float: left;
+  width: 35px;
+  height: 100%;
+  line-height: 37px;
+  text-align: center;
+  display: none;
+}
+.ui-pagination .page-slider .page-search {
+  height: 100%;
+  float: left;
+}
+.ui-pagination .page-slider .page-search .search-number {
+  width: 24px;
+  padding: 4px;
+  border: 1px solid #e9e7e8;
+  margin: 0 3px;
+  outline: none;
+  border-radius: 2px;
+}
+.ui-pagination .page-slider .page-search span {
+  display: inline-block;
+}
+.ui-pagination .page-slider .page-search .search-btn {
+  width: 28px;
+  text-align: center;
+  height: 24px;
+  line-height: 24px;
+  margin-left: 1px;
+}
+.ui-pagination .page-slider .total-count {
+  height: 24px;
+  line-height: 24px;
+  padding: 0 10px;
+}

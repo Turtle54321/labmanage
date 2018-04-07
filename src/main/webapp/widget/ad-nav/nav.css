@@ -1,0 +1,42 @@
+.mod-adming-nav {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  color: #fff;
+  background: #1890ff;
+  font-size: 16px;
+}
+.mod-adming-nav h2,
+.mod-adming-nav p {
+  display: inline-block;
+}
+.mod-adming-nav h2 {
+  margin: 0 50px 0 50px;
+}
+.mod-adming-nav .account-wrap {
+  float: right;
+  margin: 0 50px 0;
+}
+.mod-adming-nav .user-info {
+  display: none;
+  width: 100px;
+  height: 60px;
+  position: absolute;
+  z-index: 100;
+  top: 60px;
+  right: 40px;
+}
+.mod-adming-nav .user-info li {
+  width: 100px;
+  height: 30px;
+  background: #1890ff;
+  border-top: 1px solid deepskyblue;
+}
+.mod-adming-nav .user-info li a {
+  display: block;
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+}

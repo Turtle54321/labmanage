@@ -1,0 +1,13 @@
+<#macro adminNav title="委托人管理">
+    <nav class="mod-adming-nav">
+        <h2>实验室网站后台</h2>
+        <p class="sub-title">${title}</p>
+        <div class="account-wrap">
+            <#if username??>${username}</#if>  ▼
+            <ul class="user-info">
+            <li><a data-name="<#if username??>${username}</#if>" data-url="<#if strBackUrl??>${strBackUrl}</#if>" id="reset">修改密码</a></li>
+            <li><a id="exit">退出登录</a></li>
+            </ul>
+        </div>
+    </nav>
+</#macro>

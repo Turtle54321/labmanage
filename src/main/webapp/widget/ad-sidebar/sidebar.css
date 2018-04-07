@@ -1,0 +1,23 @@
+.mod-admin-sidebar {
+  width: 200px;
+  position: absolute;
+  background: #1c253b;
+  left: 0;
+  top: 60px;
+  bottom: 0;
+  color: #fff;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+.mod-admin-sidebar ul li {
+  height: 50px;
+  line-height: 50px;
+  padding: 0 15px;
+}
+.mod-admin-sidebar ul li.active {
+  background: #1890ff;
+}
+.mod-admin-sidebar ul a {
+  font-size: 18px;
+  color: #fff;
+}

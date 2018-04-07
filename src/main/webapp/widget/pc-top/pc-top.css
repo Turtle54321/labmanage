@@ -1,0 +1,32 @@
+html,
+body {
+  height: 100%;
+  background-color: #f7f7fe;
+}
+.mod-pc-top .top-title {
+  height: 64px;
+  line-height: 64px;
+  background-color: #0a9de2;
+}
+.mod-pc-top .top-title p {
+  font-size: 24px;
+  color: #ffffff;
+  font-weight: bold;
+}
+.mod-pc-top .sub-title {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  height: 56px;
+  background-color: #ffffff;
+  padding: 13px 0 13px 20px;
+  box-sizing: border-box;
+}
+.mod-pc-top .sub-title p {
+  height: 30px;
+  line-height: 30px;
+  padding-left: 30px;
+  border-left: 4px solid #0a9de2;
+  font-weight: bold;
+  font-size: 19px;
+  color: #444444;
+}

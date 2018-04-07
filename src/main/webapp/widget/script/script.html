@@ -1,0 +1,68 @@
+<script>
+    window.PageData = {
+        isMobile: document.body.className.indexOf("body-wap") >= 0,
+        basePath: "<#if ctx??>${ctx}</#if>"
+    };
+
+    /**
+     * 使用rem的初始化设置
+     */
+    (function () {
+        var root = document.documentElement;
+        root.style.fontSize = getClientWidth() / 3.75 + "px";
+        window.addEventListener("resize", function () {
+            root.style.fontSize = getClientWidth() / 3.75 + "px";
+        });
+
+        //获取屏幕可视区域的宽度
+        function getClientWidth() {
+            if (!PageData.isMobile) { //PC端固定大小
+                return 315;
+            }
+            return root.clientWidth < 1000 ? root.clientWidth : 1000;
+        }
+    })();
+</script>
+<#if isMobile == true ??>
+    <script src="../../static/base/js/zepto.js" crossorigin="anonymous"></script>
+    <script src="../../static/base/js/zepto.data.js" crossorigin="anonymous"></script>
+    <script src="../../static/base/js/zepto.touch.js" crossorigin="anonymous"></script>
+    <script src="../../static/base/js/zepto.deferred.js" crossorigin="anonymous"></script>
+    <script src="../../static/base/js/zepto.callbacks.js" crossorigin="anonymous"></script>
+    <script src="../../static/base/js/zepto.fx.js" crossorigin="anonymous"></script>
+    <script src="../../static/base/js/zepto.fx_methods.js" crossorigin="anonymous"></script>
+    <script src="../../static/base/js/zepto.ghostclick.js" crossorigin="anonymous"></script>
+    <script src="../../static/base/js/zepto.ext.js" crossorigin="anonymous"></script>
+    <script>
+        (function () {
+            var _on = $.fn.on;
+            var _off = $.fn.off;
+            var _trigger = $.fn.trigger;
+            $.fn.on = function (event, selector, data, callback, one) {
+                if (event == "click") {
+                    return _on.call(this, 'tap', selector, data, callback, one);
+                } else {
+                    return _on.call(this, event, selector, data, callback, one);
+                }
+            };
+            $.fn.trigger = function (event, args) {
+                if (event == "click") {
+                    return _trigger.call(this, 'tap', args);
+                } else {
+                    return _trigger.call(this, event, args);
+                }
+            };
+            $.fn.off = function (event, selector, callback) {
+                if (event == "click") {
+                    return _off.call(this, 'tap', selector, callback);
+                } else {
+                    return _off.call(this, event, selector, callback);
+                }
+            };
+        })();
+    </script>
+<#else>
+    <script src="../../static/base/js/jquery-1.11.3.js" crossorigin="anonymous"></script>
+</#if>
+<script src="../../static/base/js/template-web.js" crossorigin="anonymous"></script>
+

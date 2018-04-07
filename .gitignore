@@ -1,0 +1,16 @@
+/.idea
+/target/*
+labmanage.iml
+/log/*
+/target/
+.classpath
+.project
+.settings/
+.git/*
+.metadata/
+bin/
+src/main/profiles/pro/*
+src/main/webapp/upload/
+log*
+src/main/webapp/public
+src/main/webapp/output

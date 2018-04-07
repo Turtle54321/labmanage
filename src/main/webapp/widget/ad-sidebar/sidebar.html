@@ -1,0 +1,24 @@
+<#macro adminSidebar active="0">
+    <asidebar class="mod-admin-sidebar">
+        <ul>
+            <li <#if active == "0">class="active"</#if> <#if role??><#if role== 2 || role== 3 || role==4 ||role==-1>style="display:none;"</#if></#if>>
+                <a href="/back/platform/show.do?whichPage=1&everyPageNum=20">首页管理</a>
+            </li>
+            <li <#if active == "1">class="active"</#if> <#if role??><#if role== 2 || role==4 ||role==-1>style="display:none;"</#if></#if>>
+                <a href="/back/account/queryDepositAccountInfoPage.do?whichPage=1&everyPageNum=20">简介修改</a>
+            </li>
+            <li <#if active == "2">class="active"</#if> <#if role??><#if role==-1>style="display:none;"</#if></#if>>
+                <a href="/back/account/findQueryPage.do">新增/编辑新闻</a>
+            </li>
+            <li <#if active == "3">class="active"</#if> <#if role??><#if role== 2 || role==4 ||role==-1>style="display:none;"</#if></#if> >
+                <a href="/back/statistics/get.do">新增/编辑项目</a>
+            </li>
+            <li <#if active == "4">class="active"</#if> <#if role??><#if role==2 || role==4 ||role==-1>style="display:none;"</#if></#if>>
+                <a href="/back/user/log.do?whichPage=1&perCount=20">新增/编辑人员</a>
+            </li>
+            <li <#if active == "5">class="active"</#if> <#if role??><#if role== 2 || role==4 ||role==-1>style="display:none;"</#if></#if>>
+                <a href="/back/balance/getBalanceRecord.do?whichPage=1&perCount=20">新增/编辑资源</a>
+            </li>
+        </ul>
+    </asidebar>
+</#macro>

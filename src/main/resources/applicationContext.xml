@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+           http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.xhk.labmanage" />
+	<import resource="spring/applicationContext-db.xml" />
+	<import resource="spring/applicationContext-dao.xml" />
+	<import resource="spring/applicationContext-redis.xml" />
+	<!-- <import resource="spring/applicationContext-rabbitmq-consumer.xml"
+		/> <import resource="spring/applicationContext-rabbitmq-producer.xml" /> -->
+	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	<task:annotation-driven />
+	<!--切面声明-->
+	<!--<bean id="parameterVerifyAspect" class="com.zgc.fds.utils.ParameterVerifyAspect" />-->
+	<!--<bean id="bussiUtil" class="com.zgc.fds.common.util.BussiUtil" />-->
+	<bean id="jsonParameterVerifyAspect" class="com.xhk.labmanage.common.aspect.JsonParameterVerifyAspect" />
+	<bean id="retFormatAspect" class="com.xhk.labmanage.common.aspect.RetFormatAspect" />
+	<!--<bean id="esbRetFormatAspect" class="com.zgc.fds.utils.ESBRetFormatAspect" />-->
+	<!--<bean id="safetyAspect" class="com.zgc.fds.utils.SafetyAspect" />-->
+	<!--<bean id="authAspect" class="com.zgc.fds.utils.AuthAspect" />-->
+	<aop:aspectj-autoproxy />
+
+
+ 	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 拦截路径 -->
+			<mvc:mapping path="/back/user/**" />
+
+			<!-- 排除登录相关的请求路径 -->
+			<mvc:exclude-mapping path="/back/user/login.do" />
+			<mvc:exclude-mapping path="/back/user/checkLogin.do" />
+			<mvc:exclude-mapping path="/back/user/exit.do" />
+			<!-- 排除重置密码的请求路径 -->
+			<mvc:exclude-mapping path="/back/user/getDisplayMofidyPwdPage.do" />
+			<mvc:exclude-mapping path="/back/user/modifyBackUserPassword.do" />
+			<!-- 拦截器类的路径地址 -->
+			<bean class="com.xhk.labmanage.utils.LoginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<bean id="timeOutAspectBean" class="com.xhk.labmanage.common.aspect.TimeOutAspect" />
+	<!-- 配置一个切面 -->
+	<aop:config>
+		<aop:aspect id="timeOutAspect" ref="timeOutAspectBean">
+			<aop:pointcut id="timeServicePointcut" expression="execution(* com.xhk.labmanage.dao.*.*(..))" />
+			<!-- 配置环绕通知 -->
+			<aop:around pointcut-ref="timeServicePointcut" method="aroundAdvice" />
+		</aop:aspect>
+	</aop:config>
+
+    <!-- 配置freeMarker的模板路径 -->
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <!-- 原始模板路径是client/page下，经过前端编译会到WEB-INF/ftl/page/下，所以后端渲染模板时加上一层page目录即可 -->
+        <property name="templateLoaderPath" value="/" />
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
+    <!-- freemarker视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="suffix" value=".html" />
+        <property name="contentType" value="text/html;charset=UTF-8" />
+        <!-- 此变量值为pageContext.request, 页面使用方法：rc.contextPath -->
+        <property name="requestContextAttribute" value="rc" />
+    </bean>
+</beans>

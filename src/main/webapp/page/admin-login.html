@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <#include "/widget/ad-header/header.html"/>
+    <link rel="stylesheet" type="text/css" href="../static/page/ad-login/ad-login.css">
+</head>
+<body>
+
+    <!--主内容-->
+    <div class="page-admin-login">
+        <div class="login-wrap">
+            <p class="title">实验室后台管理系统</p>
+            <form action="/checkLogin.htm" method="post" class="form" >
+                <div class="input-wrap">
+                    <label for="">用户名</label>
+                    <input type="text" name="username">
+                    <p class="error-tip"></p>
+                </div>
+                <div class="input-wrap">
+                    <label for="">密码</label>
+                    <input type="password" name="password">
+                    <p class="error-tip"></p>
+                </div>
+
+                <div class="btn-wrap">
+                    <input type="submit" class="ui-btn" value="登录">
+                </div>
+            </form>
+        </div>
+    </div>
+<!--script-->
+    <script src="../static/base/js/aes.js" crossorigin="anonymous"></script>
+<#include "/widget/ad-script/ad-script.html"/>
+<script data-main="../static/page/ad-login/ad-login.js" src="../static/base/js/require.js" crossorigin="anonymous"></script>
+</body>
+</html>
