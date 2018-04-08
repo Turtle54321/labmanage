@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexManageController {
     private static Logger logger = LoggerFactory.getLogger(IndexManageController.class);
 
+    /**
+     * 进入首页管理页面，返回前端轮播图片
+     * @param modelMap
+     * @return
+     */
     @RequestMapping(value = "index-manage")
     @RetFormat(isPage = true)
     public String indexManage(ModelMap modelMap){

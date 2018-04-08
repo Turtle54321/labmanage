@@ -9,47 +9,11 @@
 <body>
 <!--nav-->
 <#include "/widget/ad-nav/nav.html"/>
-<@adminNav '首页管理'/>
-<div class="page-admin-check-reconciliation">
+<@adminNav '首页轮播图片管理'/>
+<div class="index-manage">
     <div class="admin-container">
         <div class="admin-content">
-            <form class="form search-form" action="/back/balance/getBalanceRecord.do" method="post">
-                <label for="platformNo">委托人</label>
-                <select type="file" class="id" name="platformNo" data-rule="require">
-                    <option value="">全部</option>
-                    <#if platformList??>
-                    <#list platformList as platform>
-                    <option value="${platform.platformNo}" <#if platformNo?? && platformNo == "${platform.platformNo}">selected</#if> >${platform.platformName}</option>
-                    </#list>
-                     </#if>
-                </select>
-                <label for="type">对账类型</label>
-                <select type="file" class="id" name="type">
-                    <option value="-1">全部</option>
-                    <<#if typeList??>
-                    <#list typeList as item>
-                    <option value="${item.id}" <#if typeId?? && typeId == "${item.id}">selected</#if>>${item.type}</option>
-                    </#list>
-                    </#if>
-                </select>
-                <label for="depositorStatus">委托人对账结果</label>
 
-                <select type="file" class="id depositor" name="depositorStatus">
-                    <option value="-1">全部</option>
-                    <option value="1">成功</option>
-                    <option value="0">失败</option>
-                </select>
-                <label for="fdsStatus">存管对账结果</label>
-                <select type="file" class="id fds" name="fdsStatus">
-                    <option value="-1">全部</option>
-                    <option value="1">成功</option>
-                    <option value="0">失败</option>
-                </select>
-                <#setting datetime_format="yyyy-MM-dd hh:mm:ss"/>
-                <label for="time">对账日期</label>
-                <input type="text" class="start-time datePicker" name="date" <#if date??>value="${(date*1000)?number_to_datetime}"</#if>/>
-                <input type="submit" class="submit" value="查询" />
-            </form>
             <table class="admin-ui-table">
                 <thead>
                 <tr>
