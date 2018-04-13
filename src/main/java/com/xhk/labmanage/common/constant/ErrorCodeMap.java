@@ -12,16 +12,20 @@ public class ErrorCodeMap {
     public final static int UNKNOWN = 100000001;
     public final static int NOT_FOUND_PARAM = 1000000002;
     public final static int PARAMETER_ERROR = 1000000003;
-    public final static int Login_ERROR = 1000000004;
+    public final static int LOGIN_ERROR = 1000000004;
     public final static int PARAMETER_EMPTY_ERROR = 1000000005;
+    public final static int FILE_EMPTY_ERROR = 1000000006;
+    public final static int PARAMETER_LACK_ERROR = 1000000007;
 
     private static Map<Integer, String> errorCodeMap = new HashMap<>();
     static {
         errorCodeMap.put(UNKNOWN, "请求出错");
         errorCodeMap.put(NOT_FOUND_PARAM, "找不到参数");
         errorCodeMap.put(PARAMETER_ERROR, "参数格式不对");
-        errorCodeMap.put(Login_ERROR, "登录失败");
+        errorCodeMap.put(LOGIN_ERROR, "登录失败");
         errorCodeMap.put(PARAMETER_EMPTY_ERROR, "参数不能为空");
+        errorCodeMap.put(FILE_EMPTY_ERROR, "上传文件为空");
+        errorCodeMap.put(PARAMETER_LACK_ERROR, "缺少参数");
 
     }
 

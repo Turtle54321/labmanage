@@ -23,10 +23,11 @@ public class DaoTest {
     public void indexImgDaoTest(){
         IndexImg indexImg = new IndexImg();
         indexImg.setUrl("top3.jpg");
-        indexImg.setSeq(3);
+        indexImg.setSeq(2);
         indexImg.setCreateTime(DateUtil.getCurrentTime());
         indexImg.setUpdateTime(DateUtil.getCurrentTime());
-        System.out.println(indexImgDao.insert(indexImg));
-        System.out.println(indexImg.getId());
+        System.out.println(indexImgDao.updateEntity(indexImg));
+//        System.out.println(indexImg.getId());
     }
+
 }

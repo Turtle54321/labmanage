@@ -1,5 +1,6 @@
 package com.xhk.labmanage.common.constant;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -15,7 +16,10 @@ public class ProjectConstant {
 
     public static String NEWS_IMG_DIR;
 
-    public static Properties p = new Properties();
+    //用File.separator便于跨平台
+    public static String IMG_SAVE_DIR = "src"+ File.separator+"main"+ File.separator+"webapp"+ File.separator+"static"+File.separator+"base"+File.separator+"img";
+
+    private static Properties p = new Properties();
 
     static {
 

@@ -397,15 +397,11 @@
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.0.4.v20130625</version>
-
                 <configuration>
-                    <!-- <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <webAppSourceDirectory>${basedir}/WebRoot</webAppSourceDirectory>
-                    <stopPort>9999</stopPort> -->
-
                     <webApp>
                         <!-- 设置发布 -->
                         <contextPath>/</contextPath>
+                        <defaultsDescriptor>src/main/resources/webdefault.xml</defaultsDescriptor>
                         <!-- 设置web.xml所在位置
                         <descriptor>${basedir}/WebRoot/WEB-INF/web.xml</descriptor>-->
                         <!-- 设置默认webdefault.xml,这个主要是为了禁止jetty启动之后,锁定文件.需要修改webdefault.xml里面的useFileMappedBuffer属性为false-->
@@ -414,9 +410,7 @@
                     <httpConnector>
                         <port>8070</port>
                     </httpConnector>
-
                 </configuration>
-
             </plugin>
         </plugins>
     </build>

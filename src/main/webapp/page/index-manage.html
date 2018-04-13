@@ -2,9 +2,10 @@
 <html>
 <head>
     <#include "/widget/ad-header/header.html"/>
-    <link rel="stylesheet" type="text/css" href="../static/page/index-manage/index-manage.css">
+    <!--<link rel="stylesheet" type="text/css" href="../static/page/index-manage/index-manage.css">-->
     <link rel="stylesheet" type="text/css" href="../static/base/js/datetimepicker/datetimepicker.css">
     <link rel="stylesheet" type="text/css" href="../widget/ui/pagination/pagination.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
 </head>
 <body>
 <!--nav-->
@@ -17,28 +18,23 @@
             <table class="admin-ui-table">
                 <thead>
                 <tr>
-                    <th>委托人</th>
-                    <th>对账日期</th>
-                    <th>对账类型</th>
-                    <th>委托人对账结果</th>
-                    <th>存管对账结果</th>
+                    <th>图片</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
                 <#if list??>
-                <#list list as log>
+                <#list list as img>
                 <#setting datetime_format="yyyy-MM-dd hh:mm:ss"/>
                 <tr>
-
-                    <td><#if log.platformName??>${log.platformName}</#if></td>
-                    <td><#if log.fdsTime??>${(log.fdsTime*1000)?number_to_datetime}<#elseif log.depositorTime??>${(log.depositorTime*1000)?number_to_datetime}</#if></td>
-                    <td><#if log.type??>${log.type}</#if></td>
-                    <td class="depositorResult"><#if log.depositorStatus??>${log.depositorStatus}<#else>对账中</#if></td>
-                    <td class="fdsresult"><#if log.fdsStatus??>${log.fdsStatus}<#else>对账中</#if></td>
+                    <!--<td><#if img.url??><img src="${img.url}"><#else>暂无图片</#if></td>-->
+                    <td><img class="layui-upload-img" id="img${img.seq}" <#if img.url??>src="${img.url}"</#if>></td>
+                    <td><button type="button" class="ui-btn small upload-btn" id="${img.seq}"><#if img.url??>更换<#else>上传</#if></button></td>
                 </tr>
                 </#list>
+                <input id="tmp" class="layui-hide"/>
                 <#else>
-                暂无查询结果
+                暂无图片
             </#if>
             </tbody>
             </table>
@@ -63,6 +59,7 @@
 <script src="../static/base/js/datetimepicker/moment.js" crossorigin="anonymous"></script>
 <script src="../static/base/js/datetimepicker/datetimepicker.js" crossorigin="anonymous"></script>
 <script data-main="../static/page/index-manage/index-manage.js" src="../static/base/js/require.js" crossorigin="anonymous"></script>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
 
 </body>
 </html>

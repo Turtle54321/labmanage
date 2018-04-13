@@ -40,42 +40,38 @@ public class RetFormatAspect implements Ordered {
     public Object aroundMethod(ProceedingJoinPoint pjd, RetFormat pv) throws Throwable {
         logger.info("进入切面");
         Object result = null;
-        Map map = new HashMap();
+        JSONObject jsonObject = new JSONObject();
         try {
             result = pjd.proceed();
             //方法执行之后
-            map.put("error_no",0);
-            map.put("error_message", "");
-            map.put("data", result);
-            logger.info("请求成功,ret="+ JsonUtil.getJsonFromObject(map)+",LOGID="+ HttpUtil.getLogId());
+            jsonObject.put("error_no",0);
+            jsonObject.put("error_message", "");
+            jsonObject.put("data", result);
+            logger.info("请求成功,ret="+ jsonObject.toJSONString()+",LOGID="+ HttpUtil.getLogId());
             
             if(pv.isPage()){
                 return result;
             }
         } catch (ProjectException e) {
-            map.put("error_no",e.getErrorNo());
-            map.put("error_message",e.getErrorMsg());
-            map.put("data", null);
-            logger.error("请求失败,ret=" + JsonUtil.getJsonFromObject(map)+",LOGID="+HttpUtil.getLogId());
+            jsonObject.put("error_no",e.getErrorNo());
+            jsonObject.put("error_message",e.getErrorMsg());
+            jsonObject.put("data", null);
+            logger.error("请求失败,ret=" + jsonObject.toJSONString()+",LOGID="+HttpUtil.getLogId());
         }catch (Throwable e) {
-            map.put("error_no",9999);
-            map.put("error_message","系统错误");
-            map.put("data", null);
-            logger.error("请求失败,ret=" + JsonUtil.getJsonFromObject(map)+",LOGID="+HttpUtil.getLogId(), e);
+            jsonObject.put("error_no",9999);
+            jsonObject.put("error_message","系统错误");
+            jsonObject.put("data", null);
+            logger.error("请求失败,ret=" + jsonObject.toJSONString()+",LOGID="+HttpUtil.getLogId(), e);
         }      
         if(pv.isPage()){
             //有异常了
             HttpServletRequest request = HttpUtil.getHttpRequest();
             String userAgent = request.getHeader("User-Agent");
             request.setAttribute("isMobile", MobileDetect.isMobile(userAgent));
-            request.setAttribute("msg",map.get("error_message"));
+            request.setAttribute("msg",jsonObject.get("error_message"));
             return "page/error";
 
         }else{
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("error_no",0);
-            jsonObject.put("error_message","");
-            jsonObject.put("data", result);
             return jsonObject;
         }
 

@@ -7,7 +7,6 @@ define([
     var $form = $mod.find('.form');
     var form = new formHandle({form:$form,uploadType:'ajax',is_check:false});
     var $btnWrap = $mod.find('.btn-wrap');
-    console.log("lalalalalalala")
 
     // form.on('submit-data',function(data){
     //     //用户名
@@ -39,15 +38,8 @@ define([
 
     //错误回调
     form.on('ajax-error',function(ret){
-        //修改密码
-        if( ret.error_no == 120000036){
-            alert('您的密码已过期，请前往重置密码页面重置密码。');
-            location.href = '/back/user/getDisplayMofidyPwdPage.do?isLogin=false&strBackUrl=' + location.origin + location.pathname;
-        }else{
-            Dialog.tip(ret.error_message);
-        }
+        Dialog.tip(ret.error_message);
     })
-
 
     $btnWrap.css('display','block');
 })

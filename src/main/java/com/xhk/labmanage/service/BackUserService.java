@@ -23,7 +23,7 @@ public class BackUserService {
     public String checkLogin(CheckLoginRequest request){
         Manager manager = managerDao.checkLogin(request.getUsername(),request.getPassword());
         if (manager == null){
-            throw new ProjectException(ErrorCodeMap.Login_ERROR);
+            throw new ProjectException(ErrorCodeMap.LOGIN_ERROR);
         }
         return manager.getName();
     }
