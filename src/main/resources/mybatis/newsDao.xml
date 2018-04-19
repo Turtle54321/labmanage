@@ -9,6 +9,7 @@
         <result column="content" jdbcType="VARCHAR" property="content" />
         <result column="econtent" jdbcType="VARCHAR" property="econtent" />
         <result column="url" jdbcType="VARCHAR" property="url" />
+        <result column="type" jdbcType="INTEGER" property="type" />
         <result column="create_time" jdbcType="INTEGER" property="createTime" />
         <result column="update_time" jdbcType="INTEGER" property="updateTime" />
     </resultMap>
@@ -37,6 +38,9 @@
             </if>
             <if test="url != null and url != ''">
                 url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=INTEGER},

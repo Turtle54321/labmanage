@@ -10,6 +10,7 @@ public class News {
     private String content;
     private String econtent;
     private String url;
+    private Integer type; // 1为新闻，2为项目，3为相册
     private Integer createTime;
     private Integer updateTime;
 
@@ -59,6 +60,14 @@ public class News {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public Integer getCreateTime() {
