@@ -1,71 +1,51 @@
-define([
-    '/widget/ui/utils/utils.js',
-    '/widget/ui/pagination/pagination.js',
-    '/widget/ui/form-handle/form-handle.js'
-], function (Utils, Pagination, Handle) {
-    var $mod = $('.page-admin-check-reconciliation');
-    var $form = $mod.find('.form');
-    var $pagination = $mod.find('.pagination');
-    var $fds = $mod.find('.fds');
-    var $depositor = $mod.find('.depositor');
-    var listCount = window.PageData.listCount;
-    var depositorStatus = window.PageData.depositorStatus;
-    var fdsStatus = window.PageData.fdsStatus;
-    var pagination;
-    var form = new Handle({form: $form, uploadType: 'other', is_check: false});
-
-    var init = function () {
-        initDatePicker();
-        bindEvent();
-        initPagination();
-    }();
+var E = window.wangEditor;
+var editorZH = new E('#editorZH');
+var editorEN = new E('#editorEN');
 
 
-    // 刷新页面数据回填
-    if (fdsStatus != "") {
-        $fds.val(fdsStatus);
-    }
-    if (depositorStatus != "") {
-        $depositor.val(depositorStatus);
-    }
-
-    //日历插件
-    function initDatePicker() {
-        $('.datePicker').datetimepicker({
-            locale: 'zh-cn',
-            format: 'Y-m-d H:i',
-            sideBySide: true
-        });
-    }
-
-    function bindEvent() {
-        //表单
-        form.on('submit-data', function (data) {
-            var _data = $.extend({}, data);
-            _data.date = _data.date ? new Date(_data.date) / 1000 : '';
-            location.href = '/back/balance/getBalanceRecord.do?' + $.param(_data);
-
-        })
-
-    }
-
-    //分页功能
-    function initPagination() {
-        var urlData = Utils.getUrlParams();
-        var curPage = Number(urlData.whichPage) || 1;
-
-        pagination = new Pagination({
-            container: $pagination,
-            perCount: 20,
-            totalCount: listCount,
-            onRefresh: function (curPage, callback) {
-                callback(listCount)
+var $content = $('#content');
+var $econtent = $('#econtent');
+editorZH.customConfig.onchange = function (html) {
+    // 监控变化，同步更新到 textarea
+    $content.val(html);
+};
+editorEN.customConfig.onchange = function (html) {
+    // 监控变化，同步更新到 textarea
+    console.log('change');
+    $econtent.val(html);
+};
+editorZH.create();
+editorEN.create();
+// 初始化 textarea 的值
+$content.val(editorZH.txt.html());
+$econtent.val(editorEN.txt.html());
+layui.use('form', function(){
+    var form = layui.form;
+    form.on('submit(*)', function(data){
+        console.log('data: '+data);
+        $.ajax({
+            url:"/back/transfer/create_transfer_recharge.do",
+            data:{
+                "accountId":id,
+                "userId":name,
+                "amount":amount,
+                "whichPage":1
+            },
+            dataType:"json",
+            success:function(ret){
+                if(ret.data&&ret.data.status==1){
+                    $(".mask").hide();
+                    Dialog.tip("提交成功!");
+                }else{
+                    $(".mask").hide();
+                    Dialog.tip(ret.error_message);
+                }
+            },
+            error:function(){
+                $(".mask").hide();
+                Dialog.tip("网络出错，请稍后再试");
             }
-        });
-        pagination.initPage(curPage);
-        pagination.on("refreshinstance", function (cur) {
-            var param = $.param($.extend(urlData, {whichPage: cur}))
-            location.href = "/back/balance/getBalanceRecord.do?" + param;
-        });
-    }
+        })
+        return true; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+    });
 });

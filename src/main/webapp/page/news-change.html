@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>wangEditor demo</title>
+    <#include "/widget/ad-header/header.html"/>
+    <!--<link rel="news.createTimestylesheet" type="text/css" href="../static/page/index-manage/index-manage.css">-->
+    <link rel="stylesheet" type="text/css" href="../static/base/js/datetimepicker/datetimepicker.css">
+    <link rel="stylesheet" type="text/css" href="../widget/ui/pagination/pagination.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+
+</head>
+<body>
+<!--nav-->
+<#include "/widget/ad-nav/nav.html"/>
+<@adminNav '新闻管理'/>
+<div class="news-change">
+    <div class="admin-container">
+        <div class="admin-content">
+            <form id="form" class="admin-ui-form form" action="news-change.do" method="post" >
+                <div>
+                    外链网址：（如引用外链，下方中英文的标题也需要填）
+                    <input name="url" class="layui-input" placeholder="请输入url" <#if news??&&news.url??>value="${news.url}"</#if> >
+                </div>
+        <br><hr class="layui-bg-blue"><br>
+
+                <h2>中文版</h2>
+                <br>
+                <div>标题：</div>
+                <input name="title" class="layui-input" required placeholder="请输入标题" <#if news??>value="${news.title}"</#if>/>
+                <br>
+                <div>内容：</div>
+                <div id="editorZH">
+                    <#if news??>${news.content}<#else><p>请输入...</p></#if>
+                </div>
+                <input name="id" class="layui-hide" <#if news??>value="${news.id}"</#if>>
+                <textarea id='content' name="content" class="layui-hide" >123</textarea>
+                <br><hr class="layui-bg-blue"><br>
+                <h2>English Version</h2>
+                <br>
+                <div>Title：</div>
+                <input name="etitle" class="layui-input" required placeholder="Please input title" <#if news??>value="${news.etitle}"</#if>/>
+                <br>
+                <div>Content：</div>
+                <div id="editorEN">
+                    <#if news??>${news.econtent}<#else><p>Please input ...</p></#if>
+                </div>
+                <textarea id="econtent" name="econtent" class="layui-hide"></textarea>
+                <br>
+                <div style="text-align: center">
+                    <button lay-submit  class="ui-btn small" lay-filter="*" >提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--sidebar-->
+<#include "/widget/ad-sidebar/sidebar.html"/>
+<@adminSidebar '2'/>
+<!--引入jquery-->
+<#include "/widget/ad-script/ad-script.html"/>
+
+<script type="text/javascript" src="../static/wangEditor/wangEditor.min.js"></script>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<script src="../static/base/js/datetimepicker/moment.js" crossorigin="anonymous"></script>
+<script src="../static/base/js/datetimepicker/datetimepicker.js" crossorigin="anonymous"></script>
+<script data-main="../static/page/news-manage/news-change.js" src="../static/base/js/require.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

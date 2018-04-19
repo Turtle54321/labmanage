@@ -67,12 +67,12 @@ public class IndexManageController {
         }
         String filePath = ProjectConstant.IMG_SAVE_DIR+File.separator+type+File.separator;
         logger.info(filePath);
-        fileOperateService.saveFile(file, filePath);
-        String filename = file.getOriginalFilename();
+
+        String filename = fileOperateService.saveFile(file, filePath);
         indexManageService.imgSaveDB(filename,seq);
 
         Map map = new HashMap();
-        map.put("img_url",ProjectConstant.INDEX_IMG_DIR+File.separator+filename);
+        map.put("img_url",ProjectConstant.INDEX_IMG_DIR+"/"+filename);
         return map;
     }
 }
