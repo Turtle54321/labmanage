@@ -13,7 +13,7 @@
 <body>
 <!--nav-->
 <#include "/widget/ad-nav/nav.html"/>
-<@adminNav '新闻管理'/>
+<@adminNav '项目管理'/>
 <div class="news-change">
     <div class="admin-container">
         <div class="admin-content">
@@ -34,7 +34,7 @@
                     <#if news??>${news.content}<#else><p>请输入...</p></#if>
                 </div>
                 <input name="id" class="layui-hide" <#if news??>value="${news.id}"</#if>>
-                <input id="type" name="type" class="layui-hide" value="1">
+                <input id="type" name="type" class="layui-hide" value="2">
                 <textarea id='content' name="content" class="layui-hide" ></textarea>
                 <br><hr class="layui-bg-blue"><br>
                 <h2>English Version</h2>
@@ -59,7 +59,7 @@
 
 <!--sidebar-->
 <#include "/widget/ad-sidebar/sidebar.html"/>
-<@adminSidebar '2'/>
+<@adminSidebar '4'/>
 <!--引入jquery-->
 <#include "/widget/ad-script/ad-script.html"/>
 

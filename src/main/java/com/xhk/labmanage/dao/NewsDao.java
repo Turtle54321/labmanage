@@ -16,22 +16,22 @@ public interface NewsDao {
      * @param num 取的数量
      * @return
      */
-    @Select("select * from news limit #{start},#{num};")
-    public List<News> getEntityListByPage(@Param(value = "start") int start, @Param(value = "num")int num);
+    @Select("select * from news where type=#{type} limit #{start},#{num};")
+    public List<News> getEntityListByPage(@Param(value = "type")Integer type, @Param(value = "start") int start, @Param(value = "num")int num);
 
     /**
      * 取总页数
      * @return
      */
-    @Select("select count(*) from news;")
-    public int countNum();
+    @Select("select count(*) from news where type=#{type};")
+    public int countNum(@Param(value = "type")Integer type);
 
     /**
      * 插入新闻
      * @param news
      * @return
      */
-    @Insert("insert into news (title,etitle,content,econtent,url,create_time,update_time) values (#{title},#{etitle},#{content},#{econtent},#{url},#{createTime},#{updateTime});")
+    @Insert("insert into news (title,etitle,content,econtent,url,type,create_time,update_time) values (#{title},#{etitle},#{content},#{econtent},#{url},#{type},#{createTime},#{updateTime});")
     @SelectKey(statement = "SELECT LAST_INSERT_ID() ", keyProperty = "id", before = false, resultType = int.class)
     public int insert(News news);
 

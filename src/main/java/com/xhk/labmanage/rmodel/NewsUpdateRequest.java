@@ -10,6 +10,7 @@ public class NewsUpdateRequest {
     private String content;
     private String econtent;
     private String url;
+    private Integer type;
 
     public Integer getNewsId() {
         return newsId;
@@ -57,5 +58,13 @@ public class NewsUpdateRequest {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

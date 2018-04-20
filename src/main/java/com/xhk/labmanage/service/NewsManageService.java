@@ -24,9 +24,9 @@ public class NewsManageService {
     private NewsDao newsDao;
 
     public NewsGetResponse getNewsList(NewsGetRequest request){
-        int totalNum = newsDao.countNum();
+        int totalNum = newsDao.countNum(request.getType());
         int start = (request.getPage()-1) * request.getNum();
-        List<News> newsList = newsDao.getEntityListByPage(start,request.getNum());
+        List<News> newsList = newsDao.getEntityListByPage(request.getType(),start,request.getNum());
 
         NewsGetResponse response = new NewsGetResponse();
         response.setNewsList(newsList);
@@ -45,6 +45,7 @@ public class NewsManageService {
         News news = new News();
         news.setTitle(request.getTitle());
         news.setEtitle(request.getEtitle());
+        news.setType(request.getType());
         news.setCreateTime(DateUtil.getCurrentTime());
         news.setUpdateTime(DateUtil.getCurrentTime());
         if (StringUtils.isBlank(request.getUrl())){
@@ -67,14 +68,15 @@ public class NewsManageService {
         news.setId(request.getNewsId());
         news.setTitle(request.getTitle());
         news.setEtitle(request.getEtitle());
+        news.setType(request.getType());
         news.setUpdateTime(DateUtil.getCurrentTime());
-        if (request.getUrl() != null){
-            //直接引用新闻
-            news.setUrl(request.getUrl());
-        }
-        else{
+        if (StringUtils.isBlank(request.getUrl())){
             news.setContent(request.getContent());
             news.setEcontent(request.getEcontent());
+        }
+        else{
+            //直接引用新闻
+            news.setUrl(request.getUrl());
         }
         newsDao.updateEntity(news);
     }

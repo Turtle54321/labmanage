@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * create by xhk on 2018/4/15
  */
 @Controller
-public class NewsManageController {
-    private static Logger logger = LoggerFactory.getLogger(NewsManageController.class);
+public class ProjectManageController {
+    private static Logger logger = LoggerFactory.getLogger(ProjectManageController.class);
 
     @Autowired
     private NewsManageService newsManageService;
@@ -32,7 +32,7 @@ public class NewsManageController {
      * @param modelMap
      * @return
      */
-    @RequestMapping("news-manage")
+    @RequestMapping("project-manage")
     @RetFormat(isPage = true)
     public String newsManage(Integer whichPage, Integer perCount, ModelMap modelMap){
         whichPage = whichPage == null ? 1 : whichPage;
@@ -40,16 +40,17 @@ public class NewsManageController {
         NewsGetRequest request = new NewsGetRequest();
         request.setNum(perCount);
         request.setPage(whichPage);
+        request.setType(News.PROJECT_TPYE);
         NewsGetResponse response = newsManageService.getNewsList(request);
         logger.info(JsonUtil.getJsonFromObject(response));
         modelMap.addAttribute("whichPage",whichPage);
         modelMap.addAttribute("perCount",perCount);
         modelMap.addAttribute("allCount",response.getTotalNum());
         modelMap.addAttribute("list",response.getNewsList());
-        return "page/news-manage";
+        return "page/project-manage";
     }
 
-    @RequestMapping("news-change-page")
+    @RequestMapping("project-change-page")
     @RetFormat(isPage = true)
     public String newsChange(Integer newsId, ModelMap modelMap){
         if (newsId != null){
@@ -60,53 +61,7 @@ public class NewsManageController {
             modelMap.addAttribute("news",response.getNews());
         }
         //为空新增新闻
-        return "page/news-change";
+        return "page/project-change";
     }
 
-    @RequestMapping("news-change")
-    @ResponseBody
-    @RetFormat
-    public Object newsAdd(News news){
-        if (news == null){
-            throw new ProjectException(ErrorCodeMap.PARAMETER_EMPTY_ERROR);
-        }
-        if (news.getId() == null){
-            // 新增新闻
-            NewsAddRequest request = new NewsAddRequest();
-            request.setContent(news.getContent());
-            request.setEcontent(news.getEcontent());
-            request.setTitle(news.getTitle());
-            request.setEtitle(news.getEtitle());
-            request.setUrl(news.getUrl());
-            request.setType(news.getType());
-            newsManageService.addNews(request);
-        }
-        else{
-            //修改新闻
-            NewsUpdateRequest request = new NewsUpdateRequest();
-            request.setContent(news.getContent());
-            request.setEcontent(news.getEcontent());
-            request.setTitle(news.getTitle());
-            request.setEtitle(news.getEtitle());
-            request.setUrl(news.getUrl());
-            request.setNewsId(news.getId());
-            request.setType(news.getType());
-            newsManageService.updateNews(request);
-        }
-        System.out.println(JsonUtil.getJsonFromObject(news));
-        return "success";
-    }
-
-    @RequestMapping("news-delete")
-    @ResponseBody
-    @RetFormat
-    public Object deleteNews(Integer newsId){
-        if(newsId == null){
-            throw new ProjectException(ErrorCodeMap.PARAMETER_EMPTY_ERROR);
-        }
-        NewsDeleteRequest request = new NewsDeleteRequest();
-        request.setNewsId(newsId);
-        newsManageService.deleteNews(request);
-        return "success";
-    }
 }

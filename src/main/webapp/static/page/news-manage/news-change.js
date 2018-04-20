@@ -31,6 +31,7 @@ define([
         console.log(data)
         var _data = {
             id:data.data['id'],
+            type:data.data['type'],
             title:data.data['title'],
             etitle:data.data['etitle'],
             content:data.data['content'],
@@ -41,10 +42,25 @@ define([
 
     //成功回调
     form.on('ajax-success',function(ret){
+        Dialog.tip("提交成功");
+        var type = $('#type').val();
+        var url;
+        if (type == 1){
+            url = "/news-manage.htm";
+        }
+        else if (type == 2){
+            url = "/project-manage.htm";
+        }
+        else if (type == 3){
+            url = "/photo-manage.htm";
+        }
+        else{
+            console.log(type+"?whichPage=1&perCount=8");
+        }
 
         setTimeout(function(){//两秒后跳转
-            Dialog.tip("提交成功");
-            location.href = "/news-manage.htm?whichPage=1&perCount=8";
+
+            location.href = url+"?whichPage=1&perCount=8";
         },2000);
 
     })

@@ -48,7 +48,10 @@ define([
                     success:function(ret){
                         if(ret.data&&ret.error_no==0){
                             Dialog.tip("已删除");
-                            window.location.reload();
+                            setTimeout(function(){//两秒后跳转
+                                window.location.reload();
+                            },2000);
+
                         }else{
                             Dialog.tip(ret.error_message);
                         }

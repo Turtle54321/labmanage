@@ -4,6 +4,20 @@ package com.xhk.labmanage.model;
  * create by xhk on 2018/3/26
  */
 public class News {
+    public static Integer NEWS_TYPE = 1;
+    public static Integer PROJECT_TPYE = 2;
+    public static Integer PHOTO_TYPE = 3;
+
+    public static boolean typeConfirm(Integer type){
+        // 判断type是否合法
+        if (type == NEWS_TYPE || type == PROJECT_TPYE || type == PHOTO_TYPE){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     private Integer id;
     private String title;
     private String etitle;

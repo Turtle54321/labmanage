@@ -11,6 +11,7 @@ public class NewsAddRequest {
     private String content;
     private String econtent;
     private String url;
+    private Integer type;
 
     public String getTitle() {
         return title;
@@ -50,5 +51,13 @@ public class NewsAddRequest {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

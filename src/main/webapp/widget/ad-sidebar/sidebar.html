@@ -10,14 +10,20 @@
             <li <#if active == "2">class="active"</#if>>
                 <a href="/news-manage.htm?whichPage=1&perCount=8">新闻管理</a>
             </li>
-            <li <#if active == "3">class="active"</#if>>
+            <li <#if active == "3">class="active"</#if> >
+               <a href="/people-manage.htm">新增/编辑人员</a>
+            </li>
+            <li <#if active == "4">class="active"</#if>>
                 <a href="/project-manage.htm?whichPage=1&perCount=8">项目管理</a>
             </li>
-            <li <#if active == "4">class="active"</#if> <#if role??><#if role==2 || role==4 ||role==-1>style="display:none;"</#if></#if>>
-                <a href="/back/user/log.do?whichPage=1&perCount=20">新增/编辑人员</a>
+            <li <#if active == "5">class="active"</#if> >
+                <a href="/back/balance/getBalanceRecord.do?whichPage=1&perCount=20">资源管理</a>
             </li>
-            <li <#if active == "5">class="active"</#if> <#if role??><#if role== 2 || role==4 ||role==-1>style="display:none;"</#if></#if>>
-                <a href="/back/balance/getBalanceRecord.do?whichPage=1&perCount=20">新增/编辑资源</a>
+            <li <#if active == "6">class="active"</#if> >
+                <a href="/photo-manage.htm?whichPage=1&perCount=8">相册管理</a>
+            </li>
+            <li <#if active == "7">class="active"</#if> >
+                <a href="/photo-manage.htm?whichPage=1&perCount=8">文件上传</a>
             </li>
         </ul>
     </asidebar>
