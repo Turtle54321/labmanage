@@ -86,9 +86,9 @@ define([
     //成功回调
     form.on('ajax-success',function(ret){
         Dialog.tip("提交成功");
-        // setTimeout(function(){//两秒后跳转
-        //     location.href = "/member-manage.htm?whichPage=1&perCount=8";
-        // },2000);
+        setTimeout(function(){//两秒后跳转
+            location.href = "/member-manage.htm?whichPage=1&perCount=8";
+        },2000);
 
     })
 
