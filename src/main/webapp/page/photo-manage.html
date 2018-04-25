@@ -15,7 +15,7 @@
     <div class="admin-container">
         <div class="admin-content">
         <div>
-            <a href="photo-change-page.htm" class="ui-btn small">新增</a>
+            <a href="photo-change-page.htm" class="ui-btn small">新增活动相册</a>
         </div>
             <table class="admin-ui-table">
                 <thead>
@@ -35,8 +35,6 @@
                     <td><a class="ui-btn small update" data-id="<#if news.id??>${news.id?c}</#if>">修改</a>&nbsp;<a data-id="<#if news.id??>${news.id?c}</#if>" class="ui-btn small delete">删除</a></td>
                 </tr>
                 </#list>
-                <#else>
-                暂无记录
             </#if>
             </tbody>
             </table>

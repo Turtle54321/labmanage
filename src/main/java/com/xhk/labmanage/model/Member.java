@@ -7,26 +7,17 @@ public class Member {
     private Integer id;
     private String name;
     private String ename;
-    private String head_url;
+    private String headUrl;
     private Integer status; //1：老师 2：博士生 3：硕士生
     private String note;
     private String enote;
     private String content;
     private String econtent;
-    private String content_url;
+    private String contentUrl;
     private Integer enterTime;
     private Integer graduateTime; //空为在读生， 非空为毕业生
     private Integer createTime;
     private Integer updateTime;
-
-
-    public String getEname() {
-        return ename;
-    }
-
-    public void setEname(String ename) {
-        this.ename = ename;
-    }
 
     public Integer getId() {
         return id;
@@ -44,12 +35,20 @@ public class Member {
         this.name = name;
     }
 
-    public String getHead_url() {
-        return head_url;
+    public String getEname() {
+        return ename;
     }
 
-    public void setHead_url(String head_url) {
-        this.head_url = head_url;
+    public void setEname(String ename) {
+        this.ename = ename;
+    }
+
+    public String getHeadUrl() {
+        return headUrl;
+    }
+
+    public void setHeadUrl(String headUrl) {
+        this.headUrl = headUrl;
     }
 
     public Integer getStatus() {
@@ -92,12 +91,12 @@ public class Member {
         this.econtent = econtent;
     }
 
-    public String getContent_url() {
-        return content_url;
+    public String getContentUrl() {
+        return contentUrl;
     }
 
-    public void setContent_url(String content_url) {
-        this.content_url = content_url;
+    public void setContentUrl(String contentUrl) {
+        this.contentUrl = contentUrl;
     }
 
     public Integer getEnterTime() {

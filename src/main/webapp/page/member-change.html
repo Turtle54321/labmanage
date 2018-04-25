@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>wangEditor demo</title>
+    <#include "/widget/ad-header/header.html"/>
+    <link rel="stylesheet" type="text/css" href="../static/page/member-manage/member-change.css">
+    <link rel="stylesheet" type="text/css" href="../static/base/js/datetimepicker/datetimepicker.css">
+    <link rel="stylesheet" type="text/css" href="../widget/ui/pagination/pagination.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+
+</head>
+<body>
+<!--nav-->
+<#include "/widget/ad-nav/nav.html"/>
+<@adminNav '人员管理'/>
+<div class="member-change">
+    <div class="admin-container">
+        <div class="admin-content">
+            <form class="form layui-form layui-form-pane" action="member-change.do" method="post" >
+                <blockquote class="layui-elem-quote">基本信息</blockquote>
+                <input class="layui-hide" name="id" <#if member??&&member.id??>value="${member.id}"</#if>>
+                <div class="layui-upload">
+                    <a type="button" class="ui-btn small upload-btn" id="head_img_upload">上传头像</a>
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="head_img" <#if member??&&member.headUrl??>src="${member.headUrl}"</#if>>
+                    </div>
+                    <input id="headUrl" name="headUrl" class="layui-hide"/>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">身份选择</label>
+                    <div class="layui-input-inline">
+                        <select name="status" lay-verify="required" lay-filter="select">
+                            <option class="my-option" data-id="" value=""></option>
+                            <option class="my-option" data-id="1" value="1" <#if member??&&member.status==1>selected</#if>>教师</option>
+                            <option class="my-option" data-id="2" value="2" <#if member??&&member.status==2>selected</#if>>博士生</option>
+                            <option class="my-option" data-id="3" value="3" <#if member??&&member.status==3>selected</#if>>硕士生</option>
+                        </select>
+                    </div>
+                </div>
+                <#setting datetime_format="yyyy-MM-dd"/>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">加入日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input start-time datePicker" name="enterTime" placeholder="请选择日期" <#if member??&&member.enterTime??>value="${(member.enterTime*1000)?number_to_datetime}"</#if>/>
+                    </div>
+                </div>
+                <div id="graduate" class="layui-form-item">
+                    <label class="layui-form-label">毕业日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input start-time datePicker" name="graduateTime" placeholder="请选择日期" <#if member??&&member.graduateTime??>value="${(member.graduateTime*1000)?number_to_datetime}"</#if>/>
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">在读生勿填</div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">个人外链</label>
+                    <div class="layui-input-block">
+                        <input name="contentUrl" class="layui-input" placeholder="请输入url（选填，如引用外链，下方的中英文个人介绍则不用填）" lay-verify="my_url" <#if member??&&member.contentUrl??>value="${member.contentUrl}"</#if>>
+                    </div>
+                </div>
+
+                <blockquote class="layui-elem-quote">中文版</blockquote>
+                <br>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">姓名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input" <#if member??&&member.name??>value="${member.name}"</#if>>
+                    </div>
+                </div>
+                <div class="layui-form-item note">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="note" placeholder="请输入备注" autocomplete="off" class="layui-input" <#if member??&&member.note??>value="${member.note}"</#if>>
+                    </div>
+                </div>
+
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">个人介绍</label>
+                    <div class="layui-input-block">
+                        <div id="editorZH">
+                            <#if member??>${member.content}<#else><p>请输入...</p></#if>
+                        </div>
+                    </div>
+                    <textarea id="content" name="content" class="layui-hide"></textarea>
+                </div>
+
+                <blockquote class="layui-elem-quote">English Version</blockquote>
+                <br>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">name</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="ename" required lay-verify="required" placeholder="Please input name" autocomplete="off" class="layui-input" <#if member??&&member.ename??>value="${member.ename}"</#if>>
+                    </div>
+                </div>
+                <div class="layui-form-item note">
+                    <label class="layui-form-label">note</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="enote" placeholder="Please input note" autocomplete="off" class="layui-input" <#if member??&&member.enote??>value="${member.enote}"</#if>>
+                    </div>
+                </div>
+
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">Personal Introductions</label>
+                    <div class="layui-input-block">
+                        <div id="editorEN">
+                            <#if member??>${member.econtent}<#else><p>Please input ...</p></#if>
+                        </div>
+                    </div>
+                    <textarea id="econtent" name="econtent" class="layui-hide"></textarea>
+                </div>
+                <div style="text-align: center">
+                    <!--<a lay-submit  type="submit" class="ui-btn small" lay-filter="*" onclick="document.form.submit()">提交</a>-->
+                    <button lay-submit  type="submit" class="ui-btn small" lay-filter="*" >提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--sidebar-->
+<#include "/widget/ad-sidebar/sidebar.html"/>
+<@adminSidebar '3'/>
+<!--引入jquery-->
+<#include "/widget/ad-script/ad-script.html"/>
+
+<script type="text/javascript" src="../static/wangEditor/wangEditor.min.js"></script>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<script src="../static/base/js/datetimepicker/moment.js" crossorigin="anonymous"></script>
+<script src="../static/base/js/datetimepicker/datetimepicker.js" crossorigin="anonymous"></script>
+<script data-main="../static/page/member-manage/member-change.js" src="../static/base/js/require.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

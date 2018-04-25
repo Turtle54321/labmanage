@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <#include "/widget/ad-header/header.html"/>
+    <link rel="stylesheet" type="text/css" href="../static/page/member-manage/member-manage.css">
+    <link rel="stylesheet" type="text/css" href="../static/base/js/datetimepicker/datetimepicker.css">
+    <link rel="stylesheet" type="text/css" href="../widget/ui/pagination/pagination.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+</head>
+<body>
+<!--nav-->
+<#include "/widget/ad-nav/nav.html"/>
+<@adminNav '人员管理'/>
+<div class="member-manage">
+    <div class="admin-container">
+        <div class="admin-content">
+            <a href="member-change-page.htm" class="ui-btn small">新增人员</a>
+            <div class="layui-tab layui-tab-brief " lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="tab <#if status?? && status == 1> layui-this </#if>" data-id="1">教师</li>
+                    <li class="tab <#if status?? && status == 2> layui-this </#if>" data-id="2">博士生</li>
+                    <li class="tab <#if status?? && status == 3> layui-this </#if>" data-id="3">研究生</li>
+                </ul>
+                <!--<div class="layui-tab-content"></div>-->
+                <table class="admin-ui-table">
+                    <thead>
+                    <tr>
+                        <th>头像</th>
+                        <th>姓名</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <#if list??>
+                    <#list list as member>
+                    <#setting datetime_format="yyyy-MM-dd HH:mm:ss"/>
+                    <tr>
+                        <td> <#if member.headUrl??><img class="head-img" src="${member.headUrl}"></#if></td>
+                        <td><#if member.name??>${member.name}</#if></td>
+                        <td><#if member.createTime??>${(member.createTime*1000)?number_to_datetime}</#if></td>
+                        <td><a class="ui-btn small update" data-id="<#if member.id??>${member.id?c}</#if>">修改</a>&nbsp;<a data-id="<#if member.id??>${member.id?c}</#if>" class="ui-btn small delete">删除</a></td>
+                    </tr>
+                    </#list>
+                </#if>
+                </tbody>
+                </table>
+                <div class="pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--sidebar-->
+<#include "/widget/ad-sidebar/sidebar.html"/>
+<@adminSidebar '3'/>
+<!--引入jquery-->
+<#include "/widget/ad-script/ad-script.html"/>
+
+
+<script src="../static/base/js/datetimepicker/moment.js" crossorigin="anonymous"></script>
+<script src="../static/base/js/datetimepicker/datetimepicker.js" crossorigin="anonymous"></script>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<script data-main="../static/page/member-manage/member-manage.js" src="../static/base/js/require.js" crossorigin="anonymous"></script>
+<script>
+    window.PageData = {
+        listCount: "<#if allCount??>${allCount}</#if>" || 100
+    };
+</script>
+</body>
+</html>

@@ -16,6 +16,9 @@ public class ErrorCodeMap {
     public final static int PARAMETER_EMPTY_ERROR = 1000000005;
     public final static int FILE_EMPTY_ERROR = 1000000006;
     public final static int PARAMETER_LACK_ERROR = 1000000007;
+    public final static int FAIL_TO_ADD = 1000000008;
+    public final static int FAIL_TO_UPDATE = 1000000009;
+
 
     private static Map<Integer, String> errorCodeMap = new HashMap<>();
     static {
@@ -26,6 +29,8 @@ public class ErrorCodeMap {
         errorCodeMap.put(PARAMETER_EMPTY_ERROR, "参数不能为空");
         errorCodeMap.put(FILE_EMPTY_ERROR, "上传文件为空");
         errorCodeMap.put(PARAMETER_LACK_ERROR, "缺少参数");
+        errorCodeMap.put(FAIL_TO_ADD, "新增失败");
+        errorCodeMap.put(FAIL_TO_UPDATE, "更新失败");
 
     }
 

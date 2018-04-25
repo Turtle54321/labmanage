@@ -52,12 +52,12 @@
  	<mvc:interceptors>
 		<mvc:interceptor>
 			<!-- 拦截路径 -->
-			<mvc:mapping path="/back/user/**" />
+			<mvc:mapping path="/**" />
 
 			<!-- 排除登录相关的请求路径 -->
-			<mvc:exclude-mapping path="/back/user/login.do" />
-			<mvc:exclude-mapping path="/back/user/checkLogin.do" />
-			<mvc:exclude-mapping path="/back/user/exit.do" />
+			<mvc:exclude-mapping path="/login.htm" />
+			<mvc:exclude-mapping path="/checkLogin.do" />
+			<mvc:exclude-mapping path="/exit.do" />
 			<!-- 排除重置密码的请求路径 -->
 			<mvc:exclude-mapping path="/back/user/getDisplayMofidyPwdPage.do" />
 			<mvc:exclude-mapping path="/back/user/modifyBackUserPassword.do" />

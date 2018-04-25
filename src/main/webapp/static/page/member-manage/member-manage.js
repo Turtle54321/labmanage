@@ -4,7 +4,7 @@ define([
     '/widget/ui/form-handle/form-handle.js',
     '/widget/ui/pagination/pagination.js'
 ],function(Utils,Dialog,formHandle,Pagination){
-    var $mod = $('.news-manage');
+    var $mod = $('.member-manage');
     var $pagination = $mod.find('.pagination');
     var listCount = window.PageData.listCount;
     var init = function(){
@@ -28,11 +28,16 @@ define([
         pagination.on("refreshinstance", function (cur) {
             var param = $.param($.extend(urlData,{whichPage:cur}));
             console.log(param);
-            location.href = "/news-manage.do?" + param;
+            location.href = "/member-manage.do?" + param;
         });
     }
 
     function bindEvent(){
+        $mod.find(".tab").on("click",function () {
+            var id=$(this).data("id");
+            console.log(id);
+            location.href = "/member-manage.htm?whichPage=1&perCount=8&status=" + id;
+        });
         // 删除新闻
         $mod.find(".delete").on("click",function(){
             var id=$(this).data("id");
@@ -65,7 +70,7 @@ define([
         //新闻修改
         $mod.find(".update").on("click",function(){
             var id=$(this).data("id");
-            location.href = "/news-change-page.htm?newsId=" + id;
+            location.href = "/member-change-page.htm?memberId=" + id;
         });
     }
 

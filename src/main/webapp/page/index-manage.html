@@ -29,7 +29,7 @@
                 <tr>
                     <!--<td><#if img.url??><img src="${img.url}"><#else>暂无图片</#if></td>-->
                     <td><img class="layui-upload-img" id="img${img.seq}" <#if img.url??>src="${img.url}"</#if>></td>
-                    <td><button type="button" class="ui-btn small upload-btn" id="${img.seq}"><#if img.url??>更换<#else>上传</#if></button></td>
+                    <td><a type="button" class="ui-btn small upload-btn" id="${img.seq}"><#if img.url??>更换<#else>上传</#if></a></td>
                 </tr>
                 </#list>
                 <input id="tmp" class="layui-hide"/>
