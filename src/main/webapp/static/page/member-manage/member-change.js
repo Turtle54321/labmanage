@@ -3,7 +3,6 @@ define([
     '/widget/ui/utils/utils.js',
     "/widget/ui/dialog/dialog.js"
 ],function(formHandle,Utils,Dialog){
-    console.log("c")
     layui.use('form', function(){
         var form = layui.form;
         form.on('select(select)', function(data){
@@ -85,10 +84,15 @@ define([
 
     //成功回调
     form.on('ajax-success',function(ret){
-        Dialog.tip("提交成功");
-        setTimeout(function(){//两秒后跳转
-            location.href = "/member-manage.htm?whichPage=1&perCount=8";
-        },2000);
+        if(ret.data&&ret.error_no==0){
+            Dialog.tip("提交成功");
+            setTimeout(function(){//两秒后跳转
+                location.href = "/member-manage.htm?whichPage=1&perCount=8";
+            },2000);
+
+        }else{
+            Dialog.tip(ret.error_message);
+        }
 
     })
 

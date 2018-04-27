@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>wangEditor demo</title>
+    <#include "/widget/ad-header/header.html"/>
+    <!--<link rel="news.createTimestylesheet" type="text/css" href="../static/page/index-manage/index-manage.css">-->
+    <link rel="stylesheet" type="text/css" href="../static/base/js/datetimepicker/datetimepicker.css">
+    <link rel="stylesheet" type="text/css" href="../widget/ui/pagination/pagination.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+
+</head>
+<body>
+<!--nav-->
+<#include "/widget/ad-nav/nav.html"/>
+<@adminNav '资源管理'/>
+<div class="news-change">
+    <div class="admin-container">
+        <div class="admin-content">
+            <div class="layui-form layui-form-pane">
+                <input id="resource_id" class="layui-hide" <#if resource??&&resource.id??>value="${resource.id}"</#if> >
+                <div class="layui-form-item layui-upload">
+                    <a id="resource_upload" class="ui-btn small">上传资源</a>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">文件名</label>
+                    <div class="layui-input-inline">
+                        <input id="name" type="text" required lay-verify="required" placeholder="请输入文件名" autocomplete="off" class="layui-input" <#if resource??&&resource.name??>value="${resource.name}"</#if>>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">filename</label>
+                    <div class="layui-input-inline">
+                        <input id="ename" type="text" required lay-verify="required" placeholder="please input filename" autocomplete="off" class="layui-input" <#if resource??&&resource.ename??>value="${resource.ename}"</#if>>
+                    </div>
+                </div>
+                <div style="text-align: center">
+                    <button id="submit" lay-submit  class="ui-btn small" lay-filter="*" >提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--sidebar-->
+<#include "/widget/ad-sidebar/sidebar.html"/>
+<@adminSidebar '5'/>
+<!--引入jquery-->
+<#include "/widget/ad-script/ad-script.html"/>
+
+<script type="text/javascript" src="../static/wangEditor/wangEditor.min.js"></script>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<script src="../static/base/js/datetimepicker/moment.js" crossorigin="anonymous"></script>
+<script src="../static/base/js/datetimepicker/datetimepicker.js" crossorigin="anonymous"></script>
+<script data-main="../static/page/resource-manage/resource-change.js" src="../static/base/js/require.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,32 +33,47 @@ public class FileUploadController {
     @Autowired
     private FileOperateService fileOperateService;
 
-    @RequestMapping("wang-img-upload/{type}")
+    @RequestMapping("file-upload-page")
     @ResponseBody
     @RetFormat(isPage = true)
-    public Object wangImgMultiUpload(@RequestParam(value="files",required=false)MultipartFile[] files, @PathVariable String type) {
+    public Object fileUploadPage(ModelMap modelMap) {
+
+        return "page/file-upload";
+    }
+
+    @RequestMapping(value = "file-upload")
+    @ResponseBody
+    @RetFormat
+    public Object uploadIndexImg(@RequestParam(value="file",required=false) MultipartFile file) throws Exception {
+        if (file == null){
+            throw new ProjectException(ErrorCodeMap.FILE_EMPTY_ERROR);
+        }
+        String filePath = ProjectConstant.FILE_SAVE_DIR+File.separator;
+
+        String filename = fileOperateService.saveFile(file, filePath);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("file_url",ProjectConstant.FILE_DIR+"/"+filename);
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "multi-file-upload")
+    @ResponseBody
+    @RetFormat
+    public Object uploadIndexImg(@RequestParam(value="file",required=false) MultipartFile[] files) throws Exception {
         if (files == null){
             throw new ProjectException(ErrorCodeMap.FILE_EMPTY_ERROR);
         }
-        String filePath = ProjectConstant.IMG_SAVE_DIR+ File.separator+type+File.separator;
-        logger.info(filePath);
-        List<String> realPathList = new ArrayList<>();
-        int errno = 0;
-        for (MultipartFile file : files) {
+        String filePath = ProjectConstant.FILE_SAVE_DIR+File.separator;
 
-            String filename = null;
-            try {
-                filename = fileOperateService.saveFile(file, filePath);
-            } catch (Exception e) {
-                logger.error("",e);
-                errno = 9999;
-                break;
-            }
-            realPathList.add(ProjectConstant.IMG_SAVE_DIR+"/"+type+"/"+filename);
+        List<String> filenameList = new ArrayList<>(files.length);
+        for (MultipartFile file : files){
+            String filename = ProjectConstant.FILE_DIR+"/"+ fileOperateService.saveFile(file, filePath);
+            filenameList.add(filename);
         }
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("errno",errno);
-        jsonObject.put("data",realPathList);
+        jsonObject.put("files_url",filenameList);
         return jsonObject;
     }
+
+
 }

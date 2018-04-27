@@ -3,7 +3,7 @@ package com.xhk.labmanage.model;
 /**
  * create by xhk on 2018/3/26
  */
-public class Resourse {
+public class Resource {
     private Integer id;
     private String name;
     private String ename;
