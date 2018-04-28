@@ -67,4 +67,18 @@ public class BackUserController {
         return ret;
     }
 
+    /**
+     * 进入到登录界面
+     * @return
+     */
+    @RequestMapping(value = "exit")
+    @RetFormat(isPage = true)
+    public String exit(){
+        String sessionId = HttpUtil.getHttpRequest().getSession().getId();
+        String username = RedisUtil.getValue(sessionId);
+        //清除redis中的key
+        RedisUtil.delValue(sessionId);
+        return "page/admin-login";
+    }
+
 }
