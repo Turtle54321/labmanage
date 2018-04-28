@@ -34,7 +34,6 @@ public class FileUploadController {
     private FileOperateService fileOperateService;
 
     @RequestMapping("file-upload-page")
-    @ResponseBody
     @RetFormat(isPage = true)
     public Object fileUploadPage(ModelMap modelMap) {
 
@@ -55,25 +54,5 @@ public class FileUploadController {
         jsonObject.put("file_url",ProjectConstant.FILE_DIR+"/"+filename);
         return jsonObject;
     }
-
-    @RequestMapping(value = "multi-file-upload")
-    @ResponseBody
-    @RetFormat
-    public Object uploadIndexImg(@RequestParam(value="file",required=false) MultipartFile[] files) throws Exception {
-        if (files == null){
-            throw new ProjectException(ErrorCodeMap.FILE_EMPTY_ERROR);
-        }
-        String filePath = ProjectConstant.FILE_SAVE_DIR+File.separator;
-
-        List<String> filenameList = new ArrayList<>(files.length);
-        for (MultipartFile file : files){
-            String filename = ProjectConstant.FILE_DIR+"/"+ fileOperateService.saveFile(file, filePath);
-            filenameList.add(filename);
-        }
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("files_url",filenameList);
-        return jsonObject;
-    }
-
 
 }

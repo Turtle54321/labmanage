@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>wangEditor demo</title>
+    <#include "/widget/ad-header/header.html"/>
+    <!--<link rel="news.createTimestylesheet" type="text/css" href="../static/page/index-manage/index-manage.css">-->
+    <link rel="stylesheet" type="text/css" href="../static/base/js/datetimepicker/datetimepicker.css">
+    <link rel="stylesheet" type="text/css" href="../widget/ui/pagination/pagination.css">
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+
+</head>
+<body>
+<!--nav-->
+<#include "/widget/ad-nav/nav.html"/>
+<@adminNav '文件上传中心'/>
+<div class="file-upload">
+    <div class="admin-container">
+        <div class="admin-content">
+            <div class="layui-form layui-form-pane">
+                <blockquote class="layui-elem-quote">单文件上传</blockquote>
+                <div class="layui-form-item layui-upload">
+                    <button id="file_upload" class="layui-btn">上传资源</button>
+                    <button id="file_upload_btn" class="layui-btn">上传</button>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">资源链接</label>
+                    <div class="layui-input-block">
+                        <input id="file_url" type="text"  class="layui-input">
+                    </div>
+                </div>
+                <blockquote class="layui-elem-quote">多文件上传</blockquote>
+                <div class="layui-upload layui-form-item">
+                    <button type="button" class="layui-btn" id="testList">选择多文件</button>
+                    <div class="layui-upload-list">
+                        <table class="layui-table">
+                            <thead>
+                            <tr><th>文件名</th>
+                                <th>大小</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr></thead>
+                            <tbody id="demoList"></tbody>
+                        </table>
+                    </div>
+                    <button type="button" class="layui-btn" id="testListAction">开始上传</button>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">资源链接</label>
+                    <textarea id="files_url" class="layui-textarea"></textarea>
+                </div>
+            </div>
+
+
+        </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!--sidebar-->
+<#include "/widget/ad-sidebar/sidebar.html"/>
+<@adminSidebar '7'/>
+<!--引入jquery-->
+<#include "/widget/ad-script/ad-script.html"/>
+
+<script type="text/javascript" src="../static/wangEditor/wangEditor.min.js"></script>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<script src="../static/base/js/datetimepicker/moment.js" crossorigin="anonymous"></script>
+<script src="../static/base/js/datetimepicker/datetimepicker.js" crossorigin="anonymous"></script>
+<script src="../static/base/js/datetimepicker/datetimepicker.js" crossorigin="anonymous"></script>
+<script data-main="../static/page/file-upload/file-upload.js" src="../static/base/js/require.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
