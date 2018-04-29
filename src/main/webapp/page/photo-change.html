@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>wangEditor demo</title>
+    <title>实验室后台管理系统</title>
     <#include "/widget/ad-header/header.html"/>
     <!--<link rel="news.createTimestylesheet" type="text/css" href="../static/page/index-manage/index-manage.css">-->
     <link rel="stylesheet" type="text/css" href="../static/base/js/datetimepicker/datetimepicker.css">
@@ -17,36 +17,49 @@
 <div class="news-change">
     <div class="admin-container">
         <div class="admin-content">
-            <form id="form" class="admin-ui-form form" action="news-change.do" method="post" >
-                <div>
-                    外链网址：（如引用外链，下方中英文的标题也需要填）
-                    <input name="url" class="layui-input" placeholder="请输入url" <#if news??&&news.url??>value="${news.url}"</#if> >
+            <form id="form" class="admin-ui-form form layui-form layui-form-pane" action="news-change.do" method="post" >
+                <div class="layui-form-item">
+                    <label class="layui-form-label">外链网址</label>
+                    <div class="layui-input-block">
+                        <input name="url" class="layui-input" lay-verify="my_url" placeholder="请输入url（如引用外链，下方中英文的标题也需要填）" <#if news??&&news.url??>value="${news.url}"</#if> >
+                    </div>
                 </div>
-        <br><hr class="layui-bg-blue"><br>
+                <blockquote class="layui-elem-quote">中文版</blockquote>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">标题</label>
+                    <div class="layui-input-block">
+                        <input name="title" class="layui-input" lay-verify="required" required placeholder="请输入标题" <#if news??>value="${news.title}"</#if>/>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">内容</label>
+                    <div class="layui-input-block">
+                        <div id="editorZH">
+                            <#if news??>${news.content}<#else><p>请输入...</p></#if>
+                        </div>
+                    </div>
+                    <input name="id" class="layui-hide" <#if news??>value="${news.id}"</#if>>
+                    <input id="type" name="type" class="layui-hide" value="3">
+                    <textarea id="content" name="content" class="layui-hide"></textarea>
+                </div>
 
-                <h2>中文版</h2>
-                <br>
-                <div>标题：</div>
-                <input name="title" class="layui-input" required placeholder="请输入标题" <#if news??>value="${news.title}"</#if>/>
-                <br>
-                <div>内容：</div>
-                <div id="editorZH">
-                    <#if news??>${news.content}<#else><p>请输入...</p></#if>
+                <blockquote class="layui-elem-quote">English Version</blockquote>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">Title</label>
+                    <div class="layui-input-block">
+                        <input name="etitle" class="layui-input" lay-verify="required" required placeholder="Please input title" <#if news??>value="${news.etitle}"</#if>/>
+                    </div>
                 </div>
-                <input name="id" class="layui-hide" <#if news??>value="${news.id}"</#if>>
-                <input id="type" name="type" class="layui-hide" value="3">
-                <textarea id='content' name="content" class="layui-hide" ></textarea>
-                <br><hr class="layui-bg-blue"><br>
-                <h2>English Version</h2>
-                <br>
-                <div>Title：</div>
-                <input name="etitle" class="layui-input" required placeholder="Please input title" <#if news??>value="${news.etitle}"</#if>/>
-                <br>
-                <div>Content：</div>
-                <div id="editorEN">
-                    <#if news??>${news.econtent}<#else><p>Please input ...</p></#if>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">Content</label>
+                    <div class="layui-input-block">
+                        <div id="editorEN">
+                            <#if news??>${news.econtent}<#else><p>Please input ...</p></#if>
+                        </div>
+                    </div>
+                    <textarea id="econtent" name="econtent" class="layui-hide"></textarea>
                 </div>
-                <textarea id="econtent" name="econtent" class="layui-hide"></textarea>
+
                 <br>
                 <div style="text-align: center">
                     <button lay-submit  class="ui-btn small" lay-filter="*" >提交</button>
