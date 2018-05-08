@@ -27,7 +27,6 @@ public class NewsManageService {
         int totalNum = newsDao.countNum(request.getType());
         int start = (request.getPage()-1) * request.getNum();
         List<News> newsList = newsDao.getEntityListByPage(request.getType(),start,request.getNum());
-
         NewsGetResponse response = new NewsGetResponse();
         response.setNewsList(newsList);
         response.setTotalNum(totalNum);

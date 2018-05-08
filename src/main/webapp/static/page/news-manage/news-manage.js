@@ -40,9 +40,9 @@ define([
             var str="确认删除吗？";
             if(confirm(str)){
                 $.ajax({
-                    url:"member-delete.do",
+                    url:"news-delete.do",
                     data:{
-                        "memberId":id
+                        "newsId":id
                     },
                     dataType:"json",
                     success:function(ret){

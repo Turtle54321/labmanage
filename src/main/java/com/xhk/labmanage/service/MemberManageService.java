@@ -30,6 +30,11 @@ public class MemberManageService {
         int totalNum = memberDao.countNum(request.getStatus());
         int start = (request.getWhichPage()-1) * request.getPerCount();
         List<Member> memberList = memberDao.getEntityListByPageStatus(request.getStatus(),start,request.getPerCount());
+        for (int i = 0; i < memberList.size(); i++){
+            if (StringUtils.isBlank(memberList.get(i).getContent())){
+                memberList.get(i).setContentUrl(null);
+            }
+        }
         MemberGetResponse response = new MemberGetResponse();
         response.setMemberList(memberList);
         response.setTotalNum(totalNum);

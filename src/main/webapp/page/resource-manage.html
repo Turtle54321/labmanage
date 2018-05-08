@@ -31,7 +31,7 @@
                 <#list list as resource>
                 <#setting datetime_format="yyyy-MM-dd HH:mm:ss"/>
                 <tr>
-                    <td> <#if resource.name??><a href="#">${resource.name}</a></#if></td>
+                    <td> <#if resource.name??><a href="${resource.url}">${resource.name}</a></#if></td>
                     <td><#if resource.createTime??>${(resource.createTime*1000)?number_to_datetime}</#if></td>
                     <td><a class="ui-btn small update" data-id="<#if resource.id??>${resource.id?c}</#if>">修改</a>&nbsp;<a data-id="<#if resource.id??>${resource.id?c}</#if>" class="ui-btn small delete">删除</a></td>
                 </tr>

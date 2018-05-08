@@ -37,7 +37,7 @@
                     <#list list as member>
                     <#setting datetime_format="yyyy-MM-dd HH:mm:ss"/>
                     <tr>
-                        <td> <#if member.headUrl??><img class="head-img" src="${member.headUrl}"></#if></td>
+                        <td> <#if member.headUrl??><a href="<#if member.contentUrl??&&member.contentUrl != ''>${member.contentUrl}<#else>/member-detail.htm?memberId=${member.id}</#if>"><img class="head-img" src="${member.headUrl}"></a></#if></td>
                         <td><#if member.name??>${member.name}</#if></td>
                         <td><#if member.createTime??>${(member.createTime*1000)?number_to_datetime}</#if></td>
                         <td><a class="ui-btn small update" data-id="<#if member.id??>${member.id?c}</#if>">修改</a>&nbsp;<a data-id="<#if member.id??>${member.id?c}</#if>" class="ui-btn small delete">删除</a></td>

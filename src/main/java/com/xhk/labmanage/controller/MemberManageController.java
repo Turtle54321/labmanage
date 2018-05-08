@@ -6,6 +6,7 @@ import com.xhk.labmanage.common.constant.ErrorCodeMap;
 import com.xhk.labmanage.model.Member;
 import com.xhk.labmanage.rmodel.*;
 import com.xhk.labmanage.service.MemberManageService;
+import com.xhk.labmanage.utils.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ public class MemberManageController {
         request.setStatus(status);
         MemberGetResponse response = memberManageService.getMemberList(request);
         modelMap.addAttribute("list",response.getMemberList());
+        logger.info(JsonUtil.getJsonFromObject(response.getMemberList().get(0)));
         modelMap.addAttribute("status",status);
         modelMap.addAttribute("whichPage",whichPage);
         modelMap.addAttribute("perCount",perCount);

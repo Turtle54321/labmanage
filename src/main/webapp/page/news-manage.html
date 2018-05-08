@@ -31,7 +31,7 @@
                 <#list list as news>
                 <#setting datetime_format="yyyy-MM-dd HH:mm:ss"/>
                 <tr>
-                    <td> <#if news.title??><a href="#">${news.title}</a></#if></td>
+                    <td> <#if news.title??><a href="<#if news.url??>${news.url}<#else>/news-detail.htm?newsId=${news.id}</#if>">${news.title}</a></#if></td>
                     <td><#if news.createTime??>${(news.createTime*1000)?number_to_datetime}</#if></td>
                     <td><a class="ui-btn small update" data-id="<#if news.id??>${news.id?c}</#if>">修改</a>&nbsp;<a data-id="<#if news.id??>${news.id?c}</#if>" class="ui-btn small delete">删除</a></td>
                 </tr>

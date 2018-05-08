@@ -38,6 +38,7 @@ public class NewsManageController {
         whichPage = whichPage == null ? 1 : whichPage;
         perCount = perCount == null ? 10 : perCount;
         NewsGetRequest request = new NewsGetRequest();
+        request.setType(News.NEWS_TYPE);
         request.setNum(perCount);
         request.setPage(whichPage);
         NewsGetResponse response = newsManageService.getNewsList(request);
