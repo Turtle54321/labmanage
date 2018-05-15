@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration >
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoder的默认实现类是ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${log.console.level}</level>
+        </filter>
+    </appender>
+
+    <appender name="all_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>
+                ${log.dir}error.%d{yyyy-MM-dd}.log
+            </FileNamePattern>
+            <!-- keep 7 days worth of history -->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%date [%thread] %-5level %logger{80} - %msg%n</Pattern>
+        </layout>
+    </appender>
+
+    <appender name="all_debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>
+                ${log.dir}debug.%d{yyyy-MM-dd}.log
+            </FileNamePattern>
+            <!-- keep 7 days worth of history -->
+            <MaxHistory>60</MaxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%date [%thread] %-5level %logger{80} - %msg%n</Pattern>
+        </layout>
+    </appender>
+    
+    <root>
+        <appender-ref ref="console" />
+        <appender-ref ref="all_debug" />
+        <appender-ref ref="all_error" />
+    </root>
+
+</configuration>

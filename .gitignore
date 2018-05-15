@@ -11,6 +11,5 @@ labmanage.iml
 bin/
 src/main/profiles/pro/*
 src/main/webapp/upload/
-log*
 src/main/webapp/public
 src/main/webapp/output
