@@ -62,14 +62,14 @@ public class IndexManageController {
         if (file == null){
             throw new ProjectException(ErrorCodeMap.FILE_EMPTY_ERROR);
         }
-        if (type == "index" &&seq == null){
+        if ("index".equals(type) &&seq == null){
             throw new ProjectException(ErrorCodeMap.PARAMETER_LACK_ERROR);
         }
         String filePath = ProjectConstant.IMG_SAVE_DIR+File.separator+type+File.separator;
         logger.info(filePath);
 
         String filename = fileOperateService.saveFile(file, filePath);
-        if (type == "index"){
+        if ("index".equals(type)){
             indexManageService.imgSaveDB(filename,seq);
         }
         Map map = new HashMap();

@@ -38,7 +38,7 @@ public class RetFormatAspect implements Ordered {
 
     @Around(value = "@annotation(pv)")
     public Object aroundMethod(ProceedingJoinPoint pjd, RetFormat pv) throws Throwable {
-        logger.info("进入切面");
+        logger.info("enter aspect");
         Object result = null;
         JSONObject jsonObject = new JSONObject();
         try {
@@ -47,7 +47,7 @@ public class RetFormatAspect implements Ordered {
             jsonObject.put("error_no",0);
             jsonObject.put("error_message", "");
             jsonObject.put("data", result);
-            logger.info("请求成功,ret="+ jsonObject.toJSONString()+",LOGID="+ HttpUtil.getLogId());
+            logger.info("request success,ret="+ jsonObject.toJSONString()+",LOGID="+ HttpUtil.getLogId());
             
             if(pv.isPage()){
                 return result;
@@ -56,12 +56,12 @@ public class RetFormatAspect implements Ordered {
             jsonObject.put("error_no",e.getErrorNo());
             jsonObject.put("error_message",e.getErrorMsg());
             jsonObject.put("data", null);
-            logger.error("请求失败,ret=" + jsonObject.toJSONString()+",LOGID="+HttpUtil.getLogId());
+            logger.error("request fail,ret=" + jsonObject.toJSONString()+",LOGID="+HttpUtil.getLogId());
         }catch (Throwable e) {
             jsonObject.put("error_no",9999);
             jsonObject.put("error_message","系统错误");
             jsonObject.put("data", null);
-            logger.error("请求失败,ret=" + jsonObject.toJSONString()+",LOGID="+HttpUtil.getLogId(), e);
+            logger.error("request fail,ret=" + jsonObject.toJSONString()+",LOGID="+HttpUtil.getLogId(), e);
         }      
         if(pv.isPage()){
             //有异常了
