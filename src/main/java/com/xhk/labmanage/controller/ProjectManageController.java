@@ -42,7 +42,6 @@ public class ProjectManageController {
         request.setPage(whichPage);
         request.setType(News.PROJECT_TPYE);
         NewsGetResponse response = newsManageService.getNewsList(request);
-        logger.info(JsonUtil.getJsonFromObject(response));
         modelMap.addAttribute("whichPage",whichPage);
         modelMap.addAttribute("perCount",perCount);
         modelMap.addAttribute("allCount",response.getTotalNum());

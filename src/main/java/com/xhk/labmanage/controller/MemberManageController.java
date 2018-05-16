@@ -37,7 +37,6 @@ public class MemberManageController {
         request.setStatus(status);
         MemberGetResponse response = memberManageService.getMemberList(request);
         modelMap.addAttribute("list",response.getMemberList());
-        logger.info(JsonUtil.getJsonFromObject(response.getMemberList().get(0)));
         modelMap.addAttribute("status",status);
         modelMap.addAttribute("whichPage",whichPage);
         modelMap.addAttribute("perCount",perCount);

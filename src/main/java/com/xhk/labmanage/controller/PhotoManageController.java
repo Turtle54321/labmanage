@@ -42,7 +42,6 @@ public class PhotoManageController {
         request.setPage(whichPage);
         request.setType(News.PHOTO_TYPE);
         NewsGetResponse response = newsManageService.getNewsList(request);
-        logger.info(JsonUtil.getJsonFromObject(response));
         modelMap.addAttribute("whichPage",whichPage);
         modelMap.addAttribute("perCount",perCount);
         modelMap.addAttribute("allCount",response.getTotalNum());
